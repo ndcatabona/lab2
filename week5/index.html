@@ -7,56 +7,108 @@
 	<link rel="icon" href="xv.png" type="png/xv.png">
     <style>
         body {
-		    text-align: center;
-		    background-image: url("jinwoo-solo-leveling.gif");
-			background-size: auto;
-			background-repeat: repeat;
+            text-align: center;
+            background-image: url("jinwoo-solo-leveling.gif");
+            background-size: auto;
+            background-repeat: repeat;
             font-family: Arial, sans-serif;
             margin: 20px;
-			
-			
-			
-			
-			
-			
-			
-			
         }
         h1 {
             color: white;
-	        text-shadow: 1px 1px 2px black;
-			
+            text-shadow: 1px 1px 2px black;
         }
         p {
             margin-bottom: 10px;
-			color: white;
-	        text-shadow: 1px 1px 2px black;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+        img {
+            border: 5px solid white;
+            border-radius: 10px;
+        }
+        .info-container {
+            border: 2px solid white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #4CAF50; /* Green background color */
+            color: white;
+            border: none;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <h1>My Personal Profile</h1>
-	<img src="noel.png" alt="cant load picture" width="200" height="200" style="border: 5px solid white;">
-    <p><strong>Name:</strong> Noel D. Catabona </p>
-    <p><strong>Age:</strong> 21 </p>
-    <p><strong>Height:</strong> 5'7 </p>
-  <p><strong>Sports:</strong> Basket Ball,Table Tennis, Badmenton, All of it wag lang swimming </p>
-	<p><strong>Online games:</strong> ML, LOL, CODM, Valorant </p>
-    <p><strong>Senior High School Graduated From:</strong> STA.CLARA DE MONTEFALCO PARISH SCHOOL </p>
-    <p><strong>City the High School is located at:</strong> Pasay City </p>
-    <p><strong>Course:</strong> BSIT </p>
-    <p><strong>Scholarship:</strong> Yes </p>
-    <p><strong>If yes, %:</strong> 35%</p>
-    <p><strong>Type:</strong> Manila Ecclesiastical Province School Systems Association Subsidy </p>
-    <p><strong>Did you choose this course?</strong> Yes </p>
-    <p><strong>Why Yes?</strong> I chose this course because in this our time now its all focused on technology so Ithought that this course can help me acquirecertain skills to help me in my career or future jobs.</p>
-    <p><strong>I.T. Experience:</strong> None it experiencebut I’mlearning and its fun and Iplay games a lotmostlycompetitive games and online </p>
-    <p><strong>Hobbies / Interests / Libangan:</strong> Sports and online games</p>
-    <p><strong>What do you expect to learn from this course (Web Programming)?</strong> To develop an web or create a web and otherprogramming languages </p>
-    <p><strong>What do you want to learn to help you in your chosen Major?</strong> Your Learning Goals</p>
-    <p><strong>Goals in life:</strong> Earn money and retire my parents and help them in life.Then do what Iwant like buying a house,cars, motors and have a family </p>
-    <p><strong>Do you have a dream that you wish to fulfill?</strong> Yes </p>
-    <p><strong>If yes, what is your dream?</strong> Have money thatIcan becomfortable with aircon in my house having food on my plate and taking care of my parents.<br>Even travelingto other countries</p>
-    <p><strong>Any other interesting aspects of your life that you would like to share:</strong> I’m lazy on certain things but when it comes to important things like money,<br> subjects and grade I try my  best to pass and be serious in that. </p>
+    <div class="info-container" id="infoContainer">
+        <img src="noel.png" alt="cant load picture" width="200" height="200">
+        <p><strong>Name:</strong> Noel D. Catabona </p>
+        <p><strong>Age:</strong> 21 </p>
+        
+    </div>
+
+    <button onclick="loadPrevInfo()">Back</button>
+    <button onclick="loadNextInfo()">Next</button>
+
+    <script>
+      var infoSets = [
+    {
+        name: "Noel D. Catabona",
+        age: 21,
+        height: "5'7",
+        sports: "Basket Ball, Table Tennis, Badminton",
+        onlineGames: "ML, LOL, CODM, Valorant",
+        school: "STA. CLARA DE MONTEFALCO PARISH SCHOOL",
+        location: "Pasay City",
+        course: "BSIT",
+        
+    },
+    {
+        choseCourse: "Yes",
+        courseReason: "I chose this course because in this era, it's all focused on technology, so I thought that this course can help me acquire certain skills for my career or future jobs.",
+        itExperience: "None, but I'm learning and it's fun, and I play a lot of competitive games online.",
+        hobbies: "Sports and online games"
+    },
+    {
+        learningExpectation: "To develop a web or create a web and learn other programming languages.",
+        goalsInLife: "Earn money, retire my parents, help them in life, buy a house, cars, motors, and have a family.",
+        myDreamIs: "Have enough money to be comfortable, with aircon in my house, having food on my plate, and taking care of my parents. Also, travel to other countries."
+    }
+    // Add more information sets as needed
+];
+            
+        var currentIndex = 0;
+        var infoContainer = document.getElementById('infoContainer');
+
+        function loadNextInfo() {
+            currentIndex = (currentIndex + 1) % infoSets.length;
+            updateInfo();
+        }
+
+        function loadPrevInfo() {
+            currentIndex = (currentIndex - 1 + infoSets.length) % infoSets.length;
+            updateInfo();
+        }
+
+        function updateInfo() {
+            var currentInfo = infoSets[currentIndex];
+            var contentHTML = '<img src="noel.png" alt="cant load picture" width="200" height="200">';
+            // Display each property from the current information set
+            for (var key in currentInfo) {
+                if (currentInfo.hasOwnProperty(key)) {
+                    contentHTML += '<p><strong>' + key.charAt(0).toUpperCase() + key.slice(1) + ':</strong> ' + currentInfo[key] + '</p>';
+                }
+            }
+            infoContainer.innerHTML = contentHTML;
+        }
+    </script>
 </body>
 </html>
