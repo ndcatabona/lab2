@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE CUH</title>
+    <link rel="icon" href="xv.png" type="png/xv.png">
+    <style>
+        body {
+            text-align: center;
+            background-image: url("jinwoo-solo-leveling.gif");
+            background-size: auto;
+            background-repeat: repeat;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        p {
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        img {
+            border: 5px solid white;
+            border-radius: 10px;
+        }
+
+        .info-container {
+            border: 2px solid white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My Personal Profile</h1>
+    <div class="info-container" id="infoContainer">
+        <img src="noel.png" alt="cant load picture" width="200" height="200">
+        <!-- If needed ako mag lalagay ng Info content dynamically here -->
+    </div>
+
+    <button id="prevButton">Back</button>
+    <button id="nextButton">Next</button>
+
+    <script type="module">
+        const infoSets = [
+            {
+                name: "Noel D. Catabona",
+                age: 21,
+                height: "5'7",
+                sports: "Basket Ball, Table Tennis, Badminton",
+                onlineGames: "ML, LOL, CODM, Valorant",
+                school: "STA. CLARA DE MONTEFALCO PARISH SCHOOL",
+                location: "Pasay City",
+                course: "BSIT",
+            },
+            {
+                choseCourse: "Yes",
+                courseReason: "I chose this course because in this era, it's all focused on technology, so I thought that this course can help me acquire certain skills for my career or future jobs.",
+                itExperience: "None, but I'm learning and it's fun, and I play a lot of competitive games online.",
+                hobbies: "Sports and online games"
+            },
+            {
+                learningExpectation: "To develop a web or create a web and learn other programming languages.",
+                goalsInLife: "Earn money, retire my parents, help them in life, buy a house, cars, motors, and have a family.",
+                myDreamIs: "Have enough money to be comfortable, with aircon in my house, having food on my plate, and taking care of my parents. Also, travel to other countries."
+            }
+            // If ever mag add ako ng information sets sa taas lng dapat at sa baba edit rin kung nag error
+        ];
+
+        let currentIndex = 0;
+        const infoContainer = document.getElementById('infoContainer');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+
+        function loadInfo(direction) {
+            if (direction === 'next') {
+                currentIndex = (currentIndex + 1) % infoSets.length;
+            } else if (direction === 'prev') {
+                currentIndex = (currentIndex - 1 + infoSets.length) % infoSets.length;
+            }
+
+            updateInfo();
+        }
+
+        function updateInfo() {
+            const currentInfo = infoSets[currentIndex];
+            let contentHTML = `<img src="noel.png" alt="cant load picture" width="200" height="200">`;
+
+            for (const key in currentInfo) {
+                if (currentInfo.hasOwnProperty(key)) {
+                    contentHTML += `<p><strong>${capitalizeFirstLetter(key)}:</strong> ${currentInfo[key]}</p>`;
+                }
+            }
+
+            infoContainer.innerHTML = contentHTML;
+        }
+
+        function capitalizeFirstLetter(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        prevButton.addEventListener('click', () => loadInfo('prev'));
+        nextButton.addEventListener('click', () => loadInfo('next'));
+
+        updateInfo();
+    </script>
+</body>
+
+</html>
