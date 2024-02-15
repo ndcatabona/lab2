@@ -100,5 +100,47 @@ echo "<br>";
 echo $gender;
 ?>
 
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "myDB";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
+// For Xampp Localhost
+//$servername = "localhost";
+//$username = "root";
+//$password = "";
+//$dbname = "myDB";
+
+//for Socitcloud
+$servername = "localhost";
+$username = "webprogmi221";
+$password = "g_6bCitLu.ljMK*m";
+$dbname = "webprogmi221";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "INSERT INTO ndcatabona_myguests (name, email,website,comment,gender)
+VALUES ('$name', '$email','$website','$comment','$gender')";
+
+if ($conn->query($sql) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+}
+?>
+
+
+
 </body>
 </html>
